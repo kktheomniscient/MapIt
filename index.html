@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    <aside>
+        <div id="sidebar">
+            <ul>
+                <button popovertarget="popover" onclick="document.body.classList.remove('sb-expanded')"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-all">
+                    Add node
+                </button>
+                <button onclick="deleteSelectedNode()"
+                    class="bg-[#FA0A10] hover:bg-[#de090f] text-white px-4 py-2 rounded-lg transition-all">
+                    Delete node
+                </button>
+            </ul>
+    
+            <div id="node-info" class="mt-4">
+                <h3 class="text-xl font-bold">Node Information</h3>
+                <div class="space-y-6">
+                    <div class="relative">
+                        <input
+                            class="floating-label-control peer appearance-none bg-white border border-gray-300 py-3 pr-[calc(1rem_+_24px)] pl-4 rounded-md text-[1em] leading-tight outline-none transition-all duration-200 placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full focus:bg-white placeholder-shown:bg-gray-100"
+                            type="text" name="input-name" id="node-content-sb" placeholder="Node Content">
+                        <label
+                            class="floating-label bg-white py-1 px-2 rounded-md leading-none text-[0.9375rem] text-gray-400 absolute top-0 left-2 -translate-y-1/2 peer-placeholder-shown:-translate-y-1/4 peer-focus:text-indigo-700"
+                            for="input-name">Node Content</label>
+                
+                        <svg fill="#000000" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                            class="h-6 w-6 inline-block absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 fill-current leading-none shrink-0 pointer-events-none peer-focus:text-indigo-700"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M23.2,10.2C18.1,5.1,10,3.5,2.9,5.7C2.6,5.7,2.2,6.2,2.2,7s0,3,0,3.9c0,0.8,0.7,1,1.1,0.9 c5.4-2.2,12-1.2,16.3,3.3l1.1,1.1c0.6,0.6,0.1,1.7-0.7,1.7h-7.8c-0.8,0-1.5,0.6-1.5,1.5v3c0,0.8,0.6,1.5,1.5,1.5l19.2,0.2 c0.8,0,1.5-0.6,1.5-1.5L33,3.5C33,2.7,32.4,2,31.5,2h-3c-0.8,0-1.6,0.6-1.6,1.4l-0.1,7.9c0,0.8-1.1,1.3-1.7,0.7 C25.2,12.1,23.2,10.2,23.2,10.2z">
+                                </path>
+                                <path
+                                    d="M3.5,27.8h3c0.8,0,1.5,0.7,1.5,1.5v13.2C8,43.3,8.7,44,9.5,44h33c0.8,0,1.5-0.7,1.5-1.5V16.9 c0-0.8-0.7-1.5-1.5-1.5h-4c-0.8,0-1.5-0.7-1.5-1.5v-3c0-0.8,0.7-1.5,1.5-1.5H46c2.2,0,4,1.8,4,4V46c0,2.2-1.8,4-4,4H6 c-2.2,0-4-1.8-4-4V29.3C2,28.5,2.7,27.8,3.5,27.8z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                
+                    <div class="relative">
+                        <input
+                            class="floating-label-control peer appearance-none bg-white border border-gray-300 py-3 pr-[calc(1rem_+_24px)] pl-4 rounded-md text-[1em] leading-tight outline-none transition-all duration-200 placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full focus:bg-white placeholder-shown:bg-gray-100"
+                            type="text" name="input-email" id="node-group-sb" placeholder="Node Topic">
+                        <label
+                            class="floating-label bg-white py-1 px-2 rounded-md leading-none text-[0.9375rem] text-gray-400 absolute top-0 left-2 -translate-y-1/2 peer-placeholder-shown:-translate-y-1/4 peer-focus:text-indigo-700"
+                            for="input-email">Node Topic</label>
+                
+                        <svg fill="#000000" width="256px" height="256px" viewBox="-5.2 -5.2 62.40 62.40"
+                            enable-background="new 0 0 52 52" stroke="#000000" stroke-width="0.0005200000000000001"
+                            class="h-6 w-6 inline-block absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 fill-current leading-none shrink-0 pointer-events-none peer-focus:text-indigo-700"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
+                                stroke-width="0.10400000000000001"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M49.2,13.3h-6.5l2.8-10.7V2.4c0-0.4-0.3-0.8-0.8-0.8h-5.2c-0.4,0-0.7,0.3-0.8,0.7l-2.8,11.1h-13l2.8-10.7 V2.4c0-0.4-0.3-0.8-0.8-0.8h-5.2c-0.4,0-0.7,0.3-0.8,0.7l-2.9,11H8.8c-0.4,0-0.7,0.2-0.8,0.6l-1.3,4.9v0.2c0,0.4,0.3,0.8,0.8,0.8 h6.8l-3.2,12.5h-7c-0.4,0-0.7,0.2-0.8,0.6L2,37.6v0.2c0,0.4,0.3,0.8,0.8,0.8h6.6L6.6,49.5v0.2c0,0.4,0.3,0.8,0.8,0.8h5.2 c0.4,0,0.7-0.2,0.8-0.7l2.9-11.2h12.9l-2.8,10.8v0.2c0,0.4,0.3,0.8,0.8,0.8h5.2c0.4,0,0.7-0.2,0.8-0.7L36,38.5h7.1 c0.4,0,0.7-0.2,0.8-0.7l1.3-4.9v-0.2c0-0.4-0.3-0.8-0.8-0.8h-6.7L41,19.4h6.9c0.4,0,0.7-0.2,0.8-0.7l1.3-4.9v-0.2 C50,13.6,49.6,13.3,49.2,13.3L49.2,13.3z M30.9,32.3H18l3.2-12.5h12.9C34.1,19.8,30.9,32.3,30.9,32.3z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="relative">
+                        <textarea
+                            class="floating-label-control peer appearance-none bg-white border border-gray-300 py-3 pr-[calc(1rem_+_24px)] pl-4 rounded-md text-[1em] leading-tight outline-none transition-all duration-200 placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full focus:bg-white placeholder-shown:bg-gray-100 min-h-[100px] max-h-[700px] resize-none"
+                            name="input-text" id="node-text-sb" placeholder="Node text"></textarea>
+                        <label
+                            class="floating-label bg-white py-1 px-2 rounded-md leading-none text-[0.9375rem] text-gray-400 absolute top-0 left-2 -translate-y-1/2 peer-placeholder-shown:-translate-y-1/4 peer-focus:text-indigo-700"
+                            for="input-text">Node text</label>
+                
+                        <svg fill="#000000" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                            class="h-6 w-6 inline-block absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 fill-current leading-none shrink-0 pointer-events-none peer-focus:text-indigo-700"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M4.1,43.1h43.9c0.9,0,1.6,0.7,1.6,1.6v3.1c0,0.9-0.7,1.6-1.6,1.6H4.1c-0.9,0-1.6-0.7-1.6-1.6v-3.1 C2.5,43.8,3.2,43.1,4.1,43.1z">
+                                </path>
+                                <path
+                                    d="M4.1,29h43.9c0.9,0,1.6,0.7,1.6,1.6v3.1c0,0.9-0.7,1.6-1.6,1.6H4.1c-0.9,0-1.6-0.7-1.6-1.6v-3.1 C2.5,29.7,3.2,29,4.1,29z">
+                                </path>
+                                <path
+                                    d="M32,14.9h16c0.9,0,1.6,0.7,1.6,1.6v3.1c0,0.9-0.7,1.6-1.6,1.6H32c-0.9,0-1.6-0.7-1.6-1.6v-3.1 C30.4,15.6,31.1,14.9,32,14.9z">
+                                </path>
+                                <path
+                                    d="M24.1,21.6L16.7,3.3c-0.2-0.3-0.5-0.6-0.9-0.6h-5.7c-0.3,0-0.7,0.2-0.8,0.6L2.5,21.6 c-0.1,0.3,0.1,0.8,0.5,0.8h3.6c0.3,0,0.7-0.3,0.8-0.6l1.4-3.9l8.7,0l1.5,3.9c0.1,0.3,0.5,0.6,0.8,0.6h3.6 C23.9,22.4,24.2,22,24.1,21.6z M10.5,13.1l2.3-5.8h0.5l2.5,5.8H10.5z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                    <button onclick="updateNodeInfo()"
+                        class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-all">
+                        Update Node
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div popover="auto" id="popover" class="add_node_form_container" >
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Add New Node</h2>
+        <form onsubmit="addNode(event)">
+            <fieldset>
+                <div class="space-y-6">
+                    <div class="relative">
+                        <input
+                            class="floating-label-control peer appearance-none bg-white border border-gray-300 py-3 pr-[calc(1rem_+_24px)] pl-4 rounded-md text-[1em] leading-tight outline-none transition-all duration-200 placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full focus:bg-white placeholder-shown:bg-gray-100"
+                            type="text" name="input-name" id="node-content" placeholder="Node Content">
+                        <label
+                            class="floating-label bg-white py-1 px-2 rounded-md leading-none text-[0.9375rem] text-gray-400 absolute top-0 left-2 -translate-y-1/2 peer-placeholder-shown:-translate-y-1/4 peer-focus:text-indigo-700"
+                            for="input-name">Node Content</label>
+        
+                            <svg fill="#000000" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                            class="h-6 w-6 inline-block absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 fill-current leading-none shrink-0 pointer-events-none peer-focus:text-indigo-700" viewBox="0 0 24 24" aria-hidden="true">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M23.2,10.2C18.1,5.1,10,3.5,2.9,5.7C2.6,5.7,2.2,6.2,2.2,7s0,3,0,3.9c0,0.8,0.7,1,1.1,0.9 c5.4-2.2,12-1.2,16.3,3.3l1.1,1.1c0.6,0.6,0.1,1.7-0.7,1.7h-7.8c-0.8,0-1.5,0.6-1.5,1.5v3c0,0.8,0.6,1.5,1.5,1.5l19.2,0.2 c0.8,0,1.5-0.6,1.5-1.5L33,3.5C33,2.7,32.4,2,31.5,2h-3c-0.8,0-1.6,0.6-1.6,1.4l-0.1,7.9c0,0.8-1.1,1.3-1.7,0.7 C25.2,12.1,23.2,10.2,23.2,10.2z">
+                                    </path>
+                                    <path
+                                        d="M3.5,27.8h3c0.8,0,1.5,0.7,1.5,1.5v13.2C8,43.3,8.7,44,9.5,44h33c0.8,0,1.5-0.7,1.5-1.5V16.9 c0-0.8-0.7-1.5-1.5-1.5h-4c-0.8,0-1.5-0.7-1.5-1.5v-3c0-0.8,0.7-1.5,1.5-1.5H46c2.2,0,4,1.8,4,4V46c0,2.2-1.8,4-4,4H6 c-2.2,0-4-1.8-4-4V29.3C2,28.5,2.7,27.8,3.5,27.8z">
+                                    </path>
+                                </g>
+                            </svg>
+                    </div>
+        
+                    <div class="relative">
+                        <input
+                            class="floating-label-control peer appearance-none bg-white border border-gray-300 py-3 pr-[calc(1rem_+_24px)] pl-4 rounded-md text-[1em] leading-tight outline-none transition-all duration-200 placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full focus:bg-white placeholder-shown:bg-gray-100"
+                            type="text" name="input-email" id="node-group" placeholder="Node Topic">
+                        <label
+                            class="floating-label bg-white py-1 px-2 rounded-md leading-none text-[0.9375rem] text-gray-400 absolute top-0 left-2 -translate-y-1/2 peer-placeholder-shown:-translate-y-1/4 peer-focus:text-indigo-700"
+                            for="input-email">Node Topic</label>
+        
+                            <svg fill="#000000" width="256px" height="256px" viewBox="-5.2 -5.2 62.40 62.40"
+                                enable-background="new 0 0 52 52" stroke="#000000" stroke-width="0.0005200000000000001"
+                                class="h-6 w-6 inline-block absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 fill-current leading-none shrink-0 pointer-events-none peer-focus:text-indigo-700" viewBox="0 0 24 24" aria-hidden="true">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
+                                    stroke-width="0.10400000000000001"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M49.2,13.3h-6.5l2.8-10.7V2.4c0-0.4-0.3-0.8-0.8-0.8h-5.2c-0.4,0-0.7,0.3-0.8,0.7l-2.8,11.1h-13l2.8-10.7 V2.4c0-0.4-0.3-0.8-0.8-0.8h-5.2c-0.4,0-0.7,0.3-0.8,0.7l-2.9,11H8.8c-0.4,0-0.7,0.2-0.8,0.6l-1.3,4.9v0.2c0,0.4,0.3,0.8,0.8,0.8 h6.8l-3.2,12.5h-7c-0.4,0-0.7,0.2-0.8,0.6L2,37.6v0.2c0,0.4,0.3,0.8,0.8,0.8h6.6L6.6,49.5v0.2c0,0.4,0.3,0.8,0.8,0.8h5.2 c0.4,0,0.7-0.2,0.8-0.7l2.9-11.2h12.9l-2.8,10.8v0.2c0,0.4,0.3,0.8,0.8,0.8h5.2c0.4,0,0.7-0.2,0.8-0.7L36,38.5h7.1 c0.4,0,0.7-0.2,0.8-0.7l1.3-4.9v-0.2c0-0.4-0.3-0.8-0.8-0.8h-6.7L41,19.4h6.9c0.4,0,0.7-0.2,0.8-0.7l1.3-4.9v-0.2 C50,13.6,49.6,13.3,49.2,13.3L49.2,13.3z M30.9,32.3H18l3.2-12.5h12.9C34.1,19.8,30.9,32.3,30.9,32.3z">
+                                    </path>
+                                </g>
+                            </svg>
+                    </div>
+                    <div class="relative">
+                        <textarea
+                            class="floating-label-control peer appearance-none bg-white border border-gray-300 py-3 pr-[calc(1rem_+_24px)] pl-4 rounded-md text-[1em] leading-tight outline-none transition-all duration-200 placeholder:opacity-100 placeholder:text-gray-400 focus-within:border-indigo-700 w-full focus:bg-white placeholder-shown:bg-gray-100 min-h-[100px] max-h-[700px] resize-none"
+                            name="input-text" id="node-text" placeholder="Node text"
+                            oninput="this.style.height = ''; this.style.height = Math.min(this.scrollHeight, 300) + 'px'"></textarea>
+                        <label
+                            class="floating-label bg-white py-1 px-2 rounded-md leading-none text-[0.9375rem] text-gray-400 absolute top-0 left-2 -translate-y-1/2 peer-placeholder-shown:-translate-y-1/4 peer-focus:text-indigo-700"
+                            for="input-text">Node text</label>
+                    
+                            <svg fill="#000000" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                                class="h-6 w-6 inline-block absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 fill-current leading-none shrink-0 pointer-events-none peer-focus:text-indigo-700"
+                                viewBox="0 0 24 24" aria-hidden="true">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M4.1,43.1h43.9c0.9,0,1.6,0.7,1.6,1.6v3.1c0,0.9-0.7,1.6-1.6,1.6H4.1c-0.9,0-1.6-0.7-1.6-1.6v-3.1 C2.5,43.8,3.2,43.1,4.1,43.1z">
+                                    </path>
+                                    <path
+                                        d="M4.1,29h43.9c0.9,0,1.6,0.7,1.6,1.6v3.1c0,0.9-0.7,1.6-1.6,1.6H4.1c-0.9,0-1.6-0.7-1.6-1.6v-3.1 C2.5,29.7,3.2,29,4.1,29z">
+                                    </path>
+                                    <path
+                                        d="M32,14.9h16c0.9,0,1.6,0.7,1.6,1.6v3.1c0,0.9-0.7,1.6-1.6,1.6H32c-0.9,0-1.6-0.7-1.6-1.6v-3.1 C30.4,15.6,31.1,14.9,32,14.9z">
+                                    </path>
+                                    <path
+                                        d="M24.1,21.6L16.7,3.3c-0.2-0.3-0.5-0.6-0.9-0.6h-5.7c-0.3,0-0.7,0.2-0.8,0.6L2.5,21.6 c-0.1,0.3,0.1,0.8,0.5,0.8h3.6c0.3,0,0.7-0.3,0.8-0.6l1.4-3.9l8.7,0l1.5,3.9c0.1,0.3,0.5,0.6,0.8,0.6h3.6 C23.9,22.4,24.2,22,24.1,21.6z M10.5,13.1l2.3-5.8h0.5l2.5,5.8H10.5z">
+                                    </path>
+                                </g>
+                            </svg>
+                    </div>
+                </div>
+            </fieldset>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition-all">Add it!!!</button>
+        </form>
+    </div>
+    <div popover="auto" id="tutorial-popover" class="add_node_form_container">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Welcome to MapIt!</h2>
+        <div class="space-y-4 text-gray-600">
+            <p class="leading-relaxed">Here's how to use this tool:</p>
+            <ul class="list-disc pl-5 space-y-2">
+                <li>Select any node to view or edit its details in the sidebar</li>
+                <li>Click <span class="font-semibold text-blue-600">Add node</span> to add new nodes to the selected node</li>
+                <li>Use the <span class="font-semibold text-red-600">Delete node</span> button to remove nodes</li>
+                <li>You can <span class="font-semibold text-green-600">Update nodes</span>with new info by using the button </li>
+                <li><span class="font-semibold text-purple-600">Download your mindmap</span> as a PNG image by clicking on the button near the bottom-right corner</li>
+                <li>Your mindmap is <span class="font-semibold text-amber-600">Saved locally</span> so that you can resume anytime</li>
+            </ul>
+            <div class="mt-8">
+                <button onclick="hideTutorial()"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg font-medium transition-all">
+                    Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="graph"></div>
+    <button class="fab" onclick="downloadGraphImage()">
+        <svg viewBox="0 0 52 52" enable-background="new 0 0 52 52">
+            <g>
+                <path
+                    d="M48.5,31h-3c-0.8,0-1.5,0.7-1.5,1.5v10c0,0.8-0.7,1.5-1.5,1.5h-33C8.7,44,8,43.3,8,42.5v-10 C8,31.7,7.3,31,6.5,31h-3C2.7,31,2,31.7,2,32.5V46c0,2.2,1.8,4,4,4h40c2.2,0,4-1.8,4-4V32.5C50,31.7,49.3,31,48.5,31z">
+                </path>
+                <path
+                    d="M25,37.6c0.6,0.6,1.5,0.6,2.1,0l13.5-13.5c0.6-0.6,0.6-1.5,0-2.1l-2.1-2.1c-0.6-0.6-1.5-0.6-2.1,0l-5.6,5.6 c-0.6,0.6-1.7,0.2-1.7-0.7V3.5C29,2.7,28.2,2,27.5,2h-3C23.7,2,23,2.7,23,3.5v21.2c0,0.9-1.1,1.3-1.7,0.7l-5.6-5.6 c-0.6-0.6-1.5-0.6-2.1,0L11.5,22c-0.6,0.6-0.6,1.5,0,2.1L25,37.6z">
+                </path>
+            </g>
+        </svg>
+        </button>
+</body>
+
+<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<script type="text/javascript" src="app.js">
+</script> 
+</html>
