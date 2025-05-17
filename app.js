@@ -236,6 +236,7 @@ function addNode(event) {
 
     // Update the network
     network.setData({ nodes: nodes, edges: edges });
+    zoom();
     saveGraphState();
 
     // Close popover and reset form
@@ -284,6 +285,7 @@ function deleteSelectedNode() {
 
     // Update the network
     network.setData({ nodes: nodes, edges: edges });
+    zoom();
     saveGraphState();
     document.body.classList.remove('sb-expanded');
 }
@@ -326,6 +328,7 @@ function updateNodeInfo() {
 
     // Update the network
     network.setData({ nodes: nodes, edges: edges });
+    zoom();
     saveGraphState();
     document.body.classList.remove('sb-expanded');
 }
