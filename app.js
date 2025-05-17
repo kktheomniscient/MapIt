@@ -94,24 +94,31 @@ function saveGraphState() {
 
 function loadGraphState() {
     const savedState = localStorage.getItem('mindmap_state');
-    console.log(savedState);
     if (savedState) {
         const graphState = JSON.parse(savedState);
-        console.log("graphstate")
-        console.log(graphState);
-        console.log(graphState.nodes)
-        if (graphState.nodes.length > 0) {
+        // Load nodes and edges
+        if (graphState.nodes && graphState.nodes.length > 0) {
             nodes = graphState.nodes;
             edges = graphState.edges;
-            nodeTexts = new Map(graphState.texts);
-            graphState.showTut = graphState.showTut ?? true;
+            nodeTexts = new Map(graphState.texts || []);
         } else {
             nodes = [...INITIAL_NODE];
             edges = [...INITIAL_EDGE];
         }
+
+        // Handle showTut flag and save if needed
+        if (graphState.showTut === undefined) {
+            graphState.showTut = true;
+            graphState.nodes = nodes;
+            graphState.edges = edges;
+            graphState.texts = Array.from(nodeTexts.entries());
+            localStorage.setItem('mindmap_state', JSON.stringify(graphState));
+        }
     } else {
+        // First time setup
         nodes = [...INITIAL_NODE];
         edges = [...INITIAL_EDGE];
+        saveGraphState(); // This will save with showTut = true
     }
 }
 
