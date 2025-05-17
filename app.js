@@ -87,7 +87,7 @@ function saveGraphState() {
         nodes: nodes,
         edges: edges,
         texts: Array.from(nodeTexts.entries()),
-        showTut: true
+        showTut: false
     };
     localStorage.setItem('mindmap_state', JSON.stringify(graphState));
 }
