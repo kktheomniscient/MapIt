@@ -82,21 +82,26 @@ let selectedNode = null;
 
 var container = document.getElementById('graph');
 
+// Modify saveGraphState to only handle map data
 function saveGraphState() {
     const graphState = {
         nodes: nodes,
         edges: edges,
-        texts: Array.from(nodeTexts.entries()),
-        showTut: false
+        texts: Array.from(nodeTexts.entries())
     };
     localStorage.setItem('mindmap_state', JSON.stringify(graphState));
 }
 
+// Add new function to handle tutorial state
+function saveTutorialState(show) {
+    localStorage.setItem('mindmap_tutorial', JSON.stringify({ show }));
+}
+
+// Modify loadGraphState to only handle map data
 function loadGraphState() {
     const savedState = localStorage.getItem('mindmap_state');
     if (savedState) {
         const graphState = JSON.parse(savedState);
-        // Load nodes and edges
         if (graphState.nodes && graphState.nodes.length > 0) {
             nodes = graphState.nodes;
             edges = graphState.edges;
@@ -105,20 +110,10 @@ function loadGraphState() {
             nodes = [...INITIAL_NODE];
             edges = [...INITIAL_EDGE];
         }
-
-        // Handle showTut flag and save if needed
-        if (graphState.showTut === undefined) {
-            graphState.showTut = true;
-            graphState.nodes = nodes;
-            graphState.edges = edges;
-            graphState.texts = Array.from(nodeTexts.entries());
-            localStorage.setItem('mindmap_state', JSON.stringify(graphState));
-        }
     } else {
-        // First time setup
         nodes = [...INITIAL_NODE];
         edges = [...INITIAL_EDGE];
-        saveGraphState(); // This will save with showTut = true
+        saveGraphState();
     }
 }
 
@@ -191,21 +186,19 @@ function zoom() {
     });
 }
 
-setTimeout(() => zoom(), 300)
+setTimeout(() => zoom(), 300);
 
+// Update tutorial functions
 function showTutorial() {
-    const graphState = JSON.parse(localStorage.getItem('mindmap_state')) || {};
-    if (graphState.showTut !== false) {
+    const tutorialState = JSON.parse(localStorage.getItem('mindmap_tutorial'));
+    if (!tutorialState || tutorialState.show !== false) {
         document.getElementById('tutorial-popover').showPopover();
     }
 }
 
-// Add this function
 function hideTutorial() {
     document.getElementById('tutorial-popover').hidePopover();
-    const graphState = JSON.parse(localStorage.getItem('mindmap_state')) || {};
-    graphState.showTut = false;
-    localStorage.setItem('mindmap_state', JSON.stringify(graphState));
+    saveTutorialState(false);
 }
 
 // Replace empty timeout with tutorial trigger
@@ -233,7 +226,7 @@ function addNode(event) {
 
     // Create new edge
     const newEdge = {
-        from: selectedNode, 
+        from: selectedNode,
         to: newNodeId
     };
 
