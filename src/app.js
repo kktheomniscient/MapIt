@@ -518,9 +518,9 @@ document.addEventListener("DOMContentLoaded", () => {
     saveGraphState();
   }
 
-  const deleteBtn = document.getElementById("deleteSelectedNode");
+  // const deleteBtn = document.getElementById("deleteSelectedNode");
   const NavdeleteBtn = document.getElementById("navDeleteNode");
-  deleteBtn.addEventListener("click",deleteSelectedNode)
+  // deleteBtn.addEventListener("click",deleteSelectedNode)
   NavdeleteBtn.addEventListener("click",deleteSelectedNode)
   function deleteSelectedNode() {
     const selectedNodes = network.getSelectedNodes();
