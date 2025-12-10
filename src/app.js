@@ -103,22 +103,6 @@ function toggleSidebar() {
   }
 }
 
-function toggleConnectMode() {
-  connectMode = !connectMode;
-  const connectBtn = document.getElementById('connectNodesBtn');
-
-  if (connectMode) {
-    connectBtn.classList.add('bg-green-500');
-    connectBtn.classList.remove('hover:bg-blue-500');
-    alert("Connect Mode: Click first node, then click second node to connect them");
-  } else {
-    connectBtn.classList.remove('bg-green-500');
-    connectBtn.classList.add('hover:bg-blue-500');
-    firstNodeToConnect = null;
-    // Refresh network to remove any visual indicators
-    network.setData({ nodes: nodes, edges: edges });
-  }
-}
 
 function updateSidebarInfo(nodeId) {
   const node = nodes.find(n => n.id === nodeId);
@@ -312,6 +296,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // initialize your network!
   var network = new Network(container, data, options);
 
+  function toggleConnectMode() {
+    connectMode = !connectMode;
+    const connectBtn = document.getElementById('connectNodesBtn');
+
+    if (connectMode) {
+      connectBtn.classList.add('bg-green-500');
+      connectBtn.classList.remove('hover:bg-blue-500');
+      // alert("Connect Mode: Click first node, then click second node to connect them");
+    } else {
+      connectBtn.classList.remove('bg-green-500');
+      connectBtn.classList.add('hover:bg-blue-500');
+      firstNodeToConnect = null;
+      // Refresh network to remove any visual indicators
+      network.setData({ nodes: nodes, edges: edges });
+    }
+  }
+
   network.on("beforeDrawing", (ctx) => {
     if (Grid) drawGrid(ctx, network);
   });
@@ -454,7 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!firstNodeToConnect) {
           // First node selected
           firstNodeToConnect = selectedNode;
-          alert(`First node selected (ID: ${selectedNode}). Now select the second node to connect.`);
+          // alert(`First node selected (ID: ${selectedNode}). Now select the second node to connect.`);
         } else if (firstNodeToConnect !== selectedNode) {
           // Second node selected - create connection
           const newEdge = {
@@ -472,7 +473,7 @@ document.addEventListener("DOMContentLoaded", () => {
             edges.push(newEdge);
             network.setData({ nodes: nodes, edges: edges });
             saveGraphState();
-            alert(`Connected node ${firstNodeToConnect} to node ${selectedNode}`);
+            // alert(`Connected node ${firstNodeToConnect} to node ${selectedNode}`);
           } else {
             alert("These nodes are already connected!");
           }
